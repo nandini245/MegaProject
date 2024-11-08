@@ -1,120 +1,143 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
-import { FontAwesome } from '@expo/vector-icons'; // For social media icons
+import { View, Text, TouchableOpacity, StyleSheet, TextInput, Image } from 'react-native';
+import { useNavigation } from '@react-navigation/native'; // Import the navigation hook
 
-const WelcomeScreen = () => {
+const SecondPage = () => {
+  const navigation = useNavigation(); // Initialize navigation
+
   return (
     <View style={styles.container}>
-      {/* Back Button */}
-      <TouchableOpacity style={styles.backButton}>
-        <FontAwesome name="arrow-left" size={24} color="black" />
-      </TouchableOpacity>
-
-      {/* Profile Image */}
-      <View style={styles.profileImageContainer}>
-        <Image
-          source={require('../../assets/images/logo(N).jpg')} // Replace with actual image path
-          style={styles.profileImage}
-        />
+      {/* Search Bar */}
+      <View style={styles.searchBar}>
+        <TextInput placeholder="Search Location" placeholderTextColor="#A0A0CC" style={styles.searchInput} />
       </View>
 
-      {/* Welcome Text */}
-      <Text style={styles.title}>With U</Text>
-      <Text style={styles.subtitle}>
-        Welcome{'\n'}Sign up to get started. Login if you already have an account.
-      </Text>
-
-      {/* Social Media Sign Up Options */}
-      <View style={styles.socialIcons}>
-        <TouchableOpacity>
-          <FontAwesome name="google" size={40} color="black" />
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <FontAwesome name="facebook" size={40} color="black" />
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <FontAwesome name="apple" size={40} color="black" />
-        </TouchableOpacity>
+      {/* Button Grid */}
+      <View style={styles.gridContainer}>
+        <View style={styles.gridItem}>
+          <Image
+            source={require('../../assets/images/safety.jpg')} // Adjusted path
+            style={styles.icon}
+            resizeMode="contain"
+          />
+          <TouchableOpacity style={styles.gridButton}>
+            <Text style={styles.gridText}>Safety Tips</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.gridItem}>
+          <Image
+            source={require('../../assets/images/location.jpg')} // Adjusted path
+            style={styles.icon}
+            resizeMode="contain"
+          />
+          <TouchableOpacity style={styles.gridButton}>
+            <Text style={styles.gridText}>Share Location</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.gridItem}>
+          <Image
+            source={require('../../assets/images/connect.jpg')} // Adjusted path
+            style={styles.icon}
+            resizeMode="contain"
+          />
+          <TouchableOpacity style={styles.gridButton}>
+            <Text style={styles.gridText}>Nearby Users</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.gridItem}>
+          <Image
+            source={require('../../assets/images/complaint.jpg')} // Adjusted path
+            style={styles.icon}
+            resizeMode="contain"
+          />
+          <TouchableOpacity
+            style={styles.gridButton}
+            onPress={() => navigation.navigate('ComplaintRegistration')} // Navigate to ComplaintRegistration
+          >
+            <Text style={styles.gridText}>Police Station</Text>
+          </TouchableOpacity>
+        </View>
       </View>
 
-      {/* Sign Up Button */}
-      <TouchableOpacity style={styles.signUpButton}>
-        <Text style={styles.signUpText}>Sign up</Text>
-      </TouchableOpacity>
-
-      {/* Login Text */}
-      <TouchableOpacity>
-        <Text style={styles.loginText}>Already have an account? Log in</Text>
+      {/* SOS Button */}
+      <TouchableOpacity
+        style={styles.sosButton}
+        onPress={() => {
+          console.log('SOS Button pressed'); // Log for debugging
+          navigation.navigate('SOSCall'); // Navigate to SOSCall
+        }}
+      >
+        <Text style={styles.sosText}>SOS</Text>
       </TouchableOpacity>
     </View>
   );
 };
 
+// Styles
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#F4F4FF',
     padding: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#f5f5f5',
-  },
-  backButton: {
-    position: 'absolute',
-    top: 50,
-    left: 20,
-  },
-  profileImageContainer: {
-    width: 120,
-    height: 120,
-    borderRadius: 60,
-    backgroundColor: '#e0e0e0',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 20,
-    overflow: 'hidden', // To ensure the image stays within the circular container
-  },
-  profileImage: {
-    width: '100%',
-    height: '100%',
-    resizeMode: 'cover',
-  },
-  title: {
-    fontSize: 28,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    marginBottom: 10,
-  },
-  subtitle: {
-    fontSize: 16,
-    color: '#888',
-    textAlign: 'center',
-    marginBottom: 30,
-  },
-  socialIcons: {
-    flexDirection: 'row',
     justifyContent: 'space-between',
-    width: '60%',
-    marginBottom: 30,
   },
-  signUpButton: {
-    backgroundColor: '#fff',
+  searchBar: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#FFF',
     borderRadius: 25,
+    paddingHorizontal: 15,
     paddingVertical: 10,
-    paddingHorizontal: 40,
-    borderWidth: 1,
-    borderColor: '#888',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 5,
+    elevation: 5,
+  },
+  searchInput: {
+    flex: 1,
+    marginHorizontal: 10,
+    color: '#4F4DB0',
+  },
+  gridContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+    marginTop: 20,
+  },
+  gridItem: {
+    width: '45%',
+    alignItems: 'center',
     marginBottom: 20,
   },
-  signUpText: {
+  gridButton: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  gridText: {
+    color: '#4F4DB0',
+    fontSize: 16,
+    fontWeight: '600',
+    textAlign: 'center',
+    marginTop: 5,
+  },
+  icon: {
+    width: 90,
+    height: 90,
+    marginBottom: 5,
+  },
+  sosButton: {
+    backgroundColor: '#FF4D4D',
+    paddingVertical: 20,
+    borderRadius: 15,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  sosText: {
+    color: '#FFF',
     fontSize: 18,
     fontWeight: 'bold',
-    textAlign: 'center',
-  },
-  loginText: {
-    fontSize: 14,
-    color: '#888',
-    textAlign: 'center',
   },
 });
 
-export default WelcomeScreen;
+export default SecondPage;

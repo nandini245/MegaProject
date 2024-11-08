@@ -1,26 +1,39 @@
-import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
-const Splash3 = ({ navigation }) => {
+import React from 'react';
+import { View, Text, Image, StyleSheet } from 'react-native';
+import { Link } from 'expo-router'; // Use Link for navigation
+
+const Splash3 = () => {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Join Us in Ensuring Safety</Text>
+      <Image source={require('../../assets/images/safety.jpg')} style={styles.image} />
+      <Text style={styles.title}>We are all about Women's Safety</Text>
       <Text style={styles.description}>
-        Together, we can make a difference.
+        Stay mindful with us... This app is designed to ensure your safety at all times.
       </Text>
-      <TouchableOpacity onPress={() => navigation.navigate('Home')} style={styles.getStartedButton}>
-        <Text style={styles.getStartedText}>Get Started</Text>
-      </TouchableOpacity>
+
+      {/* Navigate to Splash2 using Link */}
+      {/* <Link href="/splash/Splash" style={styles.nextButton}>
+        <Text style={styles.nextText}>Next</Text>
+      </Link> */}
+
+      {/* Skip button to navigate directly to Home */}
+      <Link href="/home" style={styles.skipButton}>
+        <Text style={styles.skipText}>Skip</Text>
+      </Link>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: { flex: 1, alignItems: 'center', justifyContent: 'center', padding: 20, backgroundColor: '#F0F0FF' },
+  image: { width: 200, height: 200, marginBottom: 30 },
   title: { fontSize: 24, fontWeight: 'bold', color: '#333', marginBottom: 10, textAlign: 'center' },
   description: { fontSize: 16, color: '#666', textAlign: 'center', marginBottom: 30 },
-  getStartedButton: { position: 'absolute', bottom: 40, backgroundColor: '#673AB7', padding: 10, borderRadius: 5 },
-  getStartedText: { color: '#FFFFFF', fontSize: 18 },
+  skipButton: { position: 'absolute', bottom: 40, left: 20 },
+  skipText: { color: '#666', fontSize: 18 },
+  nextButton: { position: 'absolute', bottom: 40, right: 20 },
+  nextText: { color: '#666', fontSize: 18 },
 });
 
 export default Splash3;

@@ -1,32 +1,26 @@
-import React, { useEffect } from 'react';
-import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 
-const Splash2 = ({ navigation }) => {
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      navigation.navigate('Splash3'); // Auto navigate to Splash3 after 2 seconds
-    }, 2000);
+import React from 'react';
+import { View, Text, Image, StyleSheet } from 'react-native';
+import { Link } from 'expo-router'; // Use Link for navigation
 
-    return () => clearTimeout(timer); // Clear timer if the component unmounts
-  }, [navigation]);
-
-  const handleSkip = () => {
-    navigation.navigate('Home'); // Navigate directly to Main on skip
-  };
-
+const Splash2 = () => {
   return (
     <View style={styles.container}>
-      <Image
-        source={require('../../assets/images/sos.jpg')}
-        style={styles.image}
-      />
-      <Text style={styles.title}>SOS</Text>
+      <Image source={require('../../assets/images/safety.jpg')} style={styles.image} />
+      <Text style={styles.title}>We are all about Women's Safety</Text>
       <Text style={styles.description}>
-        SOS functionality that can call and send SMS on one tap to your close ones.
+        Stay mindful with us... This app is designed to ensure your safety at all times.
       </Text>
-      <TouchableOpacity onPress={handleSkip} style={styles.skipButton}>
+
+      {/* Navigate to Splash2 using Link */}
+      <Link href="/splash/Splash3" style={styles.nextButton}>
+        <Text style={styles.nextText}>Next</Text>
+      </Link>
+
+      {/* Skip button to navigate directly to Home */}
+      <Link href="/home" style={styles.skipButton}>
         <Text style={styles.skipText}>Skip</Text>
-      </TouchableOpacity>
+      </Link>
     </View>
   );
 };
@@ -36,8 +30,10 @@ const styles = StyleSheet.create({
   image: { width: 200, height: 200, marginBottom: 30 },
   title: { fontSize: 24, fontWeight: 'bold', color: '#333', marginBottom: 10, textAlign: 'center' },
   description: { fontSize: 16, color: '#666', textAlign: 'center', marginBottom: 30 },
-  skipButton: { position: 'absolute', bottom: 40 },
+  skipButton: { position: 'absolute', bottom: 40, left: 20 },
   skipText: { color: '#666', fontSize: 18 },
+  nextButton: { position: 'absolute', bottom: 40, right: 20 },
+  nextText: { color: '#666', fontSize: 18 },
 });
 
 export default Splash2;
